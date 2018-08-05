@@ -4,7 +4,8 @@ import java.io.*;
 public class FileHandler {
 	public static void main(String args[])throws Exception {
 		if(args.length != 1) {
-			System.out.println("Usage: FileHanlder <file-nam>");
+			System.out.println("File name missing...");
+			System.out.println("Usage: FileHanlder <file-name>");
 			return;
 		}
 		FileHandler handler = new FileHandler();
