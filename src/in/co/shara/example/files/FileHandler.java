@@ -27,7 +27,7 @@ public class FileHandler {
 		br.close();
 	}
 
-	public void readCSVFile(String fileName) throws IOException {
+	public List<String[]> readCSVFile(String fileName) throws IOException {
 		final CSVParser parser =
 				new CSVParserBuilder()
 				.withSeparator(',')
@@ -45,5 +45,6 @@ public class FileHandler {
 			}
 		}
 		reader.close();
+		return myEntries;
 	}
 }
