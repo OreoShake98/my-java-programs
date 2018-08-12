@@ -17,16 +17,16 @@ public class DateHandling {
 		Period age = handler.ageYears("29/04/1998");
 		System.out.println("Years " + age.getYears() + " Months " + age.getMonths() + " Days " + age.getDays());
 	}
-	
+
 	public Date currentTime() {
 		return new Date();
 	}
-	
+
 	public int todaysDay() {
 		Calendar cal = Calendar.getInstance();
 		return cal.get(Calendar.DAY_OF_MONTH);
 	}
-	
+
 	public Period ageYears(String birthDate) throws ParseException{
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		Date result =  df.parse(birthDate);
@@ -41,12 +41,5 @@ public class DateHandling {
 				todayCal.get(Calendar.DAY_OF_MONTH));
 		Period period = Period.between(birth, today);
 		return period;
-
-	}
-	
-	public String formattedAge(long ageInDays) {
-		Calendar temp = Calendar.getInstance();
-		temp.
-		return null;
 	}
 }
