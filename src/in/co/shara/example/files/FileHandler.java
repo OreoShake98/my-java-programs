@@ -15,10 +15,14 @@ public class FileHandler {
 			return;
 		}
 		FileHandler handler = new FileHandler();
-		handler.readCSVFile(args[0]);
+		byte[] buffer = handler.readFile(args[0]);
+		System.out.println("File content is as below - ");
+		for(byte data : buffer) {
+			System.out.print((char)data);
+		}
 	}
 
-	public void readFile(String fileName) throws IOException {
+	public void printFile(String fileName) throws IOException {
 		File file = new File(fileName);
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String st;
@@ -46,5 +50,23 @@ public class FileHandler {
 		}
 		reader.close();
 		return myEntries;
+	}
+	
+	public byte[] readFile(String fileName) throws IOException {
+		File fileHandle = new File(fileName);
+		int fileLength = (int) fileHandle.length();
+		FileReader reader = new FileReader(fileHandle);
+		byte[] buffer = new byte[fileLength];
+		int position = 0;
+		while(reader.ready()) {
+			buffer[position] = (byte) reader.read();
+			position++;
+		}
+		reader.close();
+		return buffer;
+	}
+	
+	public void writeFile(String fileName, byte[] data) {
+		
 	}
 }
