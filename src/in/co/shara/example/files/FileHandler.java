@@ -8,18 +8,20 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 
 public class FileHandler {
+
 	public static void main(String args[])throws Exception {
-		if(args.length != 1) {
+		if(args.length == 0) {
 			System.out.println("File name missing...");
-			System.out.println("Usage: FileHanlder <file-name>");
+			System.out.println("Usage: FileHanlder <input-file-name> <output-file-name>");
 			return;
 		}
 		FileHandler handler = new FileHandler();
 		byte[] buffer = handler.readFile(args[0]);
 		System.out.println("File content is as below - ");
 		for(byte data : buffer) {
-			System.out.print((char)data);
+			System.out.print(data + " ");
 		}
+		handler.writeFile(args[1], buffer,false);
 	}
 
 	public void printFile(String fileName) throws IOException {
@@ -51,10 +53,11 @@ public class FileHandler {
 		reader.close();
 		return myEntries;
 	}
-	
+
 	public byte[] readFile(String fileName) throws IOException {
 		File fileHandle = new File(fileName);
 		int fileLength = (int) fileHandle.length();
+		System.out.println("File length is " + fileLength);
 		FileReader reader = new FileReader(fileHandle);
 		byte[] buffer = new byte[fileLength];
 		int position = 0;
@@ -65,8 +68,17 @@ public class FileHandler {
 		reader.close();
 		return buffer;
 	}
-	
-	public void writeFile(String fileName, byte[] data) {
-		
+
+
+	public void writeFile(String fileName, byte[] data, boolean append) throws IOException {
+		File fileHandle = new File(fileName);
+		FileWriter writer = new FileWriter(fileHandle,append);
+		int position = 0;
+		while(position < data.length) {
+			writer.write(data[position]);
+			position++;
+		}
+		writer.flush();
+		writer.close();
 	}
 }
