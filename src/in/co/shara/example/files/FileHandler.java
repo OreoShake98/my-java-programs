@@ -22,6 +22,10 @@ public class FileHandler {
 			System.out.print(data + " ");
 		}
 		handler.writeFile(args[1], buffer,false);
+		
+		String input = handler.readImage(args[0]);
+		
+		handler.readWriteImage(args[0], args[1]);
 	}
 
 	public void printFile(String fileName) throws IOException {
@@ -68,6 +72,35 @@ public class FileHandler {
 		reader.close();
 		return buffer;
 	}
+
+	public String readImage(String fileName) throws IOException{
+
+		FileInputStream in = null;
+		in = new FileInputStream(fileName);
+		String arr = null;
+		if (in.read() != -1)
+			 arr = in.toString();
+		in.close();
+		return arr;
+	}
+	
+
+	public void readWriteImage(String inputImage, String outputImage) throws IOException {
+		int c;
+		FileInputStream in = null;
+		FileOutputStream out = null;
+		in = new FileInputStream(inputImage);	
+		out = new FileOutputStream(outputImage);
+		while((c = in.read()) != -1) {
+			out.write(c);
+		}
+		in.close();
+		out.close();
+
+
+
+	}
+
 
 
 	public void writeFile(String fileName, byte[] data, boolean append) throws IOException {
