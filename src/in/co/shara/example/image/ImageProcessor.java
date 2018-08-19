@@ -37,4 +37,7 @@ public class ImageProcessor {
 		imageStream.close();
 	}
 
+	public boolean isPNGFile(String fileName) {
+		return false;
+	}
 }
